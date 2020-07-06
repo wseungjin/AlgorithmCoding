@@ -20,17 +20,14 @@ def printRoute(route):
     print("")
     
 def DFS(count):
-    
+    if(len(route)>1 and route[len(route)-1]<route[len(route)-2]):
+        return
     if(count>=M):
         printRoute(route)
-        return
+        return 
     for i in range(N):
-        if(visited[i]==False):
-            visited[i] = True
-            route.append(array[i])
-            DFS(count+1)
-            visited[i] = False
-            route.pop()
+        route.append(array[i])
+        DFS(count+1)
+        route.pop()   
             
-
 DFS(0)
