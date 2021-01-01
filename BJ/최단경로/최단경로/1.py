@@ -29,24 +29,30 @@ for i in range (E):
      
     graph[x-1].append({y-1:z})
 
-print(graph)
+# print(graph)
 
 visited[start] = True
 dist[start] = 0
 
-
 for j in range(V):
     minValue = INF
     minIndex = -1
+    # print(dist)
+    # print(visited)
     for i in range(len(graph[start])):
-        if visited[i]== False and list(graph[start])[i] != INF:
-            if dist[i] == INF :
-                dist[i] = dist[start] + graph[start][i]
+        nextVertex = list(list(graph[start])[i].items())[0][0]
+        nextValue = list(list(graph[start])[i].items())[0][1]
+        if visited[nextVertex]== False:
+            if dist[nextVertex] == INF :
+                dist[nextVertex] = dist[start] + nextValue
             else:
-                dist[i] = min(dist[start] + graph[start][i],dist[i])
+                if(dist[start]+nextValue<dist[nextVertex]):
+                    dist[nextVertex] = dist[start] + nextValue
+                    minValue = dist[nextVertex]
+                    minIndex = nextVertex
             if (minValue==INF):
-                minValue = dist[i] 
-                minIndex = i      
+                minValue = dist[nextVertex] 
+                minIndex = nextVertex
     if minIndex != -1:     
         visited[minIndex] = True
         start = minIndex
